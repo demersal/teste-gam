@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+	<title>Lista Clientes</title>
+	<link rel="StyleSheet" type="text/css" href="css/css.css"
+		media="screen" />
+</h:head>
+
+<h:body>
+	<h:form id="Cadastro">
+
+		<h2 class="titulos">Cadastro cliente</h2>
+		<h:messages />
+		<h:panelGrid id="panel" columns="3">
+			<h:outputLabel value="CPF" for="CPF" />
+			<h:inputText id="CPF" value="#{clienteBean.cliente.nrCpfCliente}"
+				maxlength="16" converterMessage="Favor digitar apenas números!"
+				required="true" size="16">
+				<f:passThroughAttribute name="placeholder" value="Informe o CPF" />
+			</h:inputText>
+			<br />
+
+			<h:outputLabel value="Nome" for="Nome" />
+			<h:inputText id="Nome" value="#{clienteBean.cliente.nmCliente}"
+				maxlength="50" required="true" size="40">
+				<f:passThroughAttribute name="placeholder"
+					value="Informe o nome do cliente" />
+			</h:inputText>
+			<br />
+
+			<h:outputLabel value="Email" for="Email" />
+			<h:inputText id="Email" value="#{clienteBean.cliente.dsEmailCliente}"
+				maxlength="100" required="true" size="40" >
+				<f:passThroughAttribute name="placeholder"
+					value="Informe o email do cliente" />
+			</h:inputText>
+			<br />
+
+			<p>
+				<h:commandButton styleClass="buttons" type="submit" value="Salvar"
+					action="#{clienteBean.salvar()}" />
+				<h:commandButton styleClass="buttons" type="submit" immediate="true"
+					value="Voltar" action="#{clienteBean.lista()}" />
+			</p>
+
+		</h:panelGrid>
+
+	</h:form>
+
+	<h:form id="telefoneForm" rendered="#{clienteBean.editing}">
+	
+	<h2 class="titulos">Telefones</h2>
+
+		<h:panelGrid id="fonePanel" columns="3">
+			<h:outputLabel value="Tipo telefone" for="tipo_telefone" />
+			<h:selectOneMenu value="#{clienteBean.telefoneCliente.cdTipoTelefone}">
+				<f:selectItems value="#{clienteBean.tipoTelefoneList}" var="tipo"
+					itemLabel="#{tipo.dsTipoTelefone}" itemValue="#{tipo.cdTipoTelefone}" />
+			</h:selectOneMenu>
+			<br />
+
+			<h:outputLabel value="Número telefone" for="numero" />
+			<h:inputText id="numero" value="#{clienteBean.telefoneCliente.nrTelefone}"
+				maxlength="60" required="true" size="30">
+				<f:passThroughAttribute name="placeholder"
+					value="Informe o número do telefone" />
+			</h:inputText>
+			<br />
+
+			<p>
+				<h:commandButton styleClass="buttons" type="submit" value="Adicionar telefone"
+					action="#{clienteBean.salvarTelefone()}" />
+			</p>
+
+		</h:panelGrid>
+
+	</h:form>
+	<br />
+	<h:dataTable id="listfone" styleClass="table" value="#{clienteBean.cliente.telefones}" var="telefone" rendered="#{clienteBean.editing}">
+			<h:column>
+				<f:facet name="header">Código</f:facet>
+   				#{telefone.idTelefone}
+   		</h:column>
+
+			<h:column>
+				<f:facet name="header">Tipo</f:facet>
+				#{telefone.dsTipoTelefone}
+    	</h:column>
+
+			<h:column>
+				<f:facet name="header">Número</f:facet>
+				#{telefone.nrTelefone}
+    	</h:column>
+
+		</h:dataTable>
+
+</h:body>
+</html>

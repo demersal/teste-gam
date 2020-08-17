@@ -1,0 +1,21 @@
+server:
+  port: 6699
+  servlet:
+    context-path: /contato
+spring:
+  application:
+    name: demo
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/atividade
+    username: postgres
+    password: db97!#!!
+mybatis:
+  mapper-locations: classpath*:/mybatis/*.xml
+  type-aliases-package: atividade.model
+logging:
+  level:
+    org.mybatis: TRACE
+    org.mybatis.spring: TRACE
+    org.apache.ibatis: TRACE
+    org.mybatis.spring.SqlSessionUti: TRACE

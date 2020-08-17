@@ -1,0 +1,56 @@
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	color: #4f046d;
+	font-weight: 600;
+}
+
+.table {
+	border-spacing: 0px 0;
+}
+
+thead>tr>th {
+	padding: 6px;
+}
+
+#listForm>table>thead, table>thead {
+	background-color: #c7ccd0;
+}
+
+#listForm>table>tbody>tr>td, #listfone > tbody > tr > td {
+	padding: 10px 0;
+	width: 200px;
+	text-align: center;
+}
+
+input[type=text], select {
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #4f046d;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+
+.buttons {
+	background-color: #4f046d;
+	border: none;
+	padding: 10px;
+	color: #fff;
+	border-radius: 5px;
+	min-width: 90px;
+}
+
+.buttons:hover {
+	cursor: pointer;
+	background-color: #36044a;
+}
+
+.titulos {
+	background-color: #4f046d;
+	color: #fff;
+	padding: 5px;
+}
+
+ul>li {
+	color: #e91e63;
+}

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="atividade.mapper.ClienteMapper">
+
+	<select id="findBy" resultType="Cliente" parameterType="java.lang.String">
+		SELECT
+			cd_cliente, nr_cpf_cliente, nm_cliente, ds_email_cliente, dt_atualizacao
+		FROM
+			cliente
+		WHERE
+			upper(nm_cliente) like '%' || upper(#{value}) || '%'
+			OR nr_cpf_cliente = case when (#{value} ~ E'^\\d+$') then #{value}::numeric else null end
+			OR upper(ds_email_cliente) like '%' || upper(#{value}) || '%'
+	</select>
+	
+	<select id="findAll" resultType="Cliente">
+		SELECT cd_cliente, nr_cpf_cliente, nm_cliente, ds_email_cliente, dt_atualizacao
+		FROM cliente
+	</select>
+	
+	
+	<insert id="insert" useGeneratedKeys="true" keyProperty="cd_cliente">
+	
+		<selectKey keyProperty="cd_cliente" resultType="java.lang.Long" order="BEFORE">
+			select coalesce(max(cd_cliente), 0) + 1 a from cliente
+		</selectKey>
+		
+		insert into cliente
+			(cd_cliente, nr_cpf_cliente, nm_cliente, ds_email_cliente, dt_atualizacao)
+		values
+			(#{cd_cliente}, #{nr_cpf_cliente}, #{nm_cliente}, #{ds_email_cliente}, #{dt_atualizacao})
+			
+	</insert>
+	
+	<update id="update">
+	
+		update cliente set
+			nr_cpf_cliente = #{nr_cpf_cliente},
+			nm_cliente = #{nm_cliente},
+			ds_email_cliente = #{ds_email_cliente},
+			dt_atualizacao = #{dt_atualizacao}
+		where cd_cliente = #{cd_cliente}
+	
+	</update>
+	
+</mapper>

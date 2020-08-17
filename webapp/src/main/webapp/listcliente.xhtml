@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+	<title>Lista Clientes</title>
+
+	<link rel="StyleSheet" type="text/css" href="css/css.css"
+		media="screen" />
+
+</h:head>
+
+<h:body>
+	<h2 class="titulos">Clientes</h2>
+	<h:form id="search">
+		<h:panelGrid id="panel" columns="3">
+			<h:inputText id="Busca" value="#{clienteBean.filter}" maxlength="100"
+				size="40">
+				<f:passThroughAttribute name="placeholder" value="Busca" />
+			</h:inputText>
+			<h:commandButton styleClass="buttons" type="submit" value="Buscar"
+				action="#{clienteBean.lista()}" />
+		</h:panelGrid>
+	</h:form>
+	<h:form id="novo">
+		<h:commandButton styleClass="buttons" type="submit"
+			value="Novo Cliente" action="#{clienteBean.add()}" />
+	</h:form>
+	<br />
+
+	<h3 class="titulos">Lista Clientes</h3>
+	<h:form id="listForm">
+		<h:dataTable styleClass="table" value="#{clienteBean.clientes}"
+			var="cliente">
+			<h:column>
+				<f:facet name="header">Código</f:facet>
+   				#{cliente.cdCliente}
+   		</h:column>
+
+			<h:column>
+				<f:facet name="header">CPF</f:facet>
+				#{cliente.nrCpfCliente}
+    	</h:column>
+
+			<h:column>
+				<f:facet name="header">Nome</f:facet>
+				#{cliente.nmCliente}
+    	</h:column>
+
+			<h:column>
+				<f:facet name="header">Email</f:facet>
+				#{cliente.dsEmailCliente}
+    	</h:column>
+
+		<!-- <h:column>
+				<f:facet name="header">Fones</f:facet>
+				#{cliente.dsTelefones}
+    	</h:column> -->
+    	<h:column>
+    	<f:facet name="header">Fones</f:facet>
+			<h:dataTable value="#{cliente.telefones}" var="telefone">
+	            <h:column>
+	                <h:outputText  value="#{telefone.dsTipoTelefone} - #{telefone.nrTelefone}" />
+	            </h:column>
+        	</h:dataTable>
+    	</h:column>
+
+			<h:column>
+				<f:facet name="header">Ação</f:facet>
+				<h:commandButton type="submit" styleClass="buttons"
+					action="#{clienteBean.editar(cliente)}" value="Alterar" />
+			</h:column>
+
+		</h:dataTable>
+	</h:form>
+</h:body>
+</html>

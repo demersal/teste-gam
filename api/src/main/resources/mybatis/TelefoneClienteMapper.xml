@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="atividade.mapper.TelefoneClienteMapper">
+
+	<select id="findTelefonesCliente" resultType="TelefoneCliente" parameterType="TelefoneCliente">
+		SELECT
+			tel.id_telefone, tel.cd_cliente, tel.cd_tipo_telefone, tel.nr_telefone, tel.dt_atualizacao
+		FROM
+			telefone_cliente tel
+		JOIN cliente cli
+			ON cli.cd_cliente = tel.cd_cliente
+		WHERE
+			tel.cd_cliente = #{cd_cliente}
+	</select>
+	
+	<insert id="insert" useGeneratedKeys="true" keyProperty="cd_cliente">
+	
+		<selectKey keyProperty="id_telefone" resultType="java.lang.Long" order="BEFORE">
+			select coalesce(max(id_telefone), 0) + 1 a from telefone_cliente
+		</selectKey>
+		
+		insert into telefone_cliente
+			(id_telefone, cd_cliente, cd_tipo_telefone, nr_telefone, dt_atualizacao)
+		values
+			(#{id_telefone}, #{cd_cliente}, #{cd_tipo_telefone}, #{nr_telefone}, #{dt_atualizacao})
+			
+	</insert>
+	
+</mapper>
