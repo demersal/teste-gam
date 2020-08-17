@@ -12,4 +12,5 @@
     - em BaseService.java fica o endereço base de comunicação com a api acima http://localhost:6699/contato
     - permite a busca listagem/cadastro de clientes e edição de clientee e cadastro/listagem de telefones do cliente
 - Imagens com prints das telas estão na raiz no projeto
+- Ao iniciar  os dois projetos acessar http://localhost:<porta>/webapp/
 
